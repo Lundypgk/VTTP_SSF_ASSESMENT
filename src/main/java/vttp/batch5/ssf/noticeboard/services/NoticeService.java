@@ -48,16 +48,19 @@ public class NoticeService {
         try {
 			System.out.println(body);
             String response = restTemplate.exchange(url, HttpMethod.POST, body, String.class).getBody();
-			// System.out.println("===================came here 2=======================");
+			System.out.println("===================came here 2=======================");
 			JsonObject jsonResponse = Json.createReader(new StringReader(response)).readObject();
 			String id = jsonResponse.getString("id");
 			noticeRepo.insertNotices(id, jsonResponse);
+            System.out.println("=====================Response from API: " + jsonResponse);
 			return jsonResponse;
-                // System.out.println("=====================Response from API: " + jsonResponse);
         } catch (RestClientException e) {
 			e.printStackTrace();
+			JsonObject errorResponse = Json.createObjectBuilder()
+										.add("message", e.getMessage())
+										.build();
+			return errorResponse;
         }
-		return null;
     }
 	public boolean helth() {
 		return noticeRepo.isHelth();
