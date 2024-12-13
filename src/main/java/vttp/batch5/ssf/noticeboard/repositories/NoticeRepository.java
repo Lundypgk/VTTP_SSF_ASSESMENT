@@ -21,8 +21,8 @@ public class NoticeRepository {
 	 *
 	 */
 
-	// SET notice:<noticeId> '{"title":"Sample Title","poster":"Sample Poster","postDate":1234567890,"Categories":["Category1","Category2"],"text":"Sample text content"}'
-	//
+	// SET notice:<noticeId> '{"title":"Sample","poster":"rnadm@gmail.com","postDate":123456789,"Categories":["sports","meeting"],"text":"text"}'
+
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
