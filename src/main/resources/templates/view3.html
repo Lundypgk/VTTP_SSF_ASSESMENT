@@ -1,0 +1,15 @@
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Successful posting</title>
+		<link rel="stylesheet" href="/styles.css">
+	</head>
+	<body>
+    <h1>Cannot post notice to the server</h1>
+    <h2>Error message</h2>
+    <p th:text="${message}">An error occurred while trying to post your notice.</p>
+    <a href="/" th:href="@{/}">Back</a>
+	</body>
+</html>
