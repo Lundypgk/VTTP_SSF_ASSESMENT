@@ -1,9 +1,8 @@
-
-
 package vttp.batch5.ssf.noticeboard.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +28,7 @@ public class NoticeController {
     }
 
     @PostMapping("/notice")
-    public String submitNotice(@Valid Notice notice, BindingResult bindingResult, Model model) {
+    public String postNotice(@Valid Notice notice, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("notice", notice);
             return "notice";
@@ -48,10 +47,13 @@ public class NoticeController {
     @GetMapping("/status")
     public ResponseEntity<String> getStatus() {
         if (noticeService.helth()) {
-            return ResponseEntity.ok("{\"status\": \"healthy\"}");
+            return ResponseEntity.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body("{}");
         } else {
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
-                                .body("{\"status\": \"unhealthy\"}");
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body("{}");
         }
     }
 

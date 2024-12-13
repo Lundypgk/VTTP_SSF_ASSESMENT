@@ -25,5 +25,7 @@ COPY --from=build /target/noticeboard-0.0.1-SNAPSHOT.jar assesment.jar
 # Expose the port your application runs on
 # EXPOSE 8080
 
+HEALTHCHECK --interval=1m --start-period=2m CMD curl --fail http://localhost:8080/status || exit 1
+
 # Command to run the application
 ENTRYPOINT ["java", "-jar", "assesment.jar"]

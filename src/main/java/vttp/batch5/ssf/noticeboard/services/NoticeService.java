@@ -43,16 +43,15 @@ public class NoticeService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> body = new HttpEntity<>(jsonNotice.toString(), headers);
+        HttpEntity<String> toPost = new HttpEntity<>(jsonNotice.toString(), headers);
 
         try {
-			System.out.println(body);
-            String response = restTemplate.exchange(url, HttpMethod.POST, body, String.class).getBody();
-			System.out.println("===================came here 2=======================");
+            String response = restTemplate.exchange(url, HttpMethod.POST, toPost, String.class).getBody();
+			// System.out.println("===================came here 2=======================");
 			JsonObject jsonResponse = Json.createReader(new StringReader(response)).readObject();
 			String id = jsonResponse.getString("id");
 			noticeRepo.insertNotices(id, jsonResponse);
-            System.out.println("=====================Response from API: " + jsonResponse);
+            // System.out.println("=====================Response from API: " + jsonResponse);
 			return jsonResponse;
         } catch (RestClientException e) {
 			e.printStackTrace();
